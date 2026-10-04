@@ -29,9 +29,9 @@ The interface was designed in Figma before development.
 
 ### UI Design Specification
 
-![Expense Tracker Design Specification](./assets/design-spec.png)
+![Expense Tracker Design Specification](./assets/UI%20Design%20Specification.png)
 
-**Figma Design:** [View the Figma Design](YOUR_FIGMA_LINK_HERE)
+**Figma Design:** [View the Figma Design](https://www.figma.com/design/6mU78ld6EPOYtMNu8JxRSa/DreiDev---Expense-tracker?node-id=2-2&t=nlPXN0E4Lh4rsz0W-1)
 
 ## Project Goals
 
