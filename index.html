@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  <title>Expense Tracker</title>
+</head> 
+<body>
+  <nav class="nav">
+    <a href="/" class="logo">
+      <div class="logo__mark">
+        <img class="logo__icon" src="./assets/icons/wallet-icon.svg" alt="">
+      </div>
+      <span class="logo__name">Expense Tracker</span>
+    </a>
+  </nav>
+
+  <main class="main">
+    <div class="container">
+      <section class="dashboard">
+        <div class="dashboard__topBar">
+
+            <div class="dashboard__header">
+              <h1>Dashboard</h1>
+              <div class="date">
+                <img class="date__icon" src="./assets/icons/calendar-icon.svg" alt="">
+                <span class="date__text">September 2026</span>
+              </div>
+            </div>
+
+          <div class="add">
+            <button class="add__button">
+              <img src="./assets/icons/plus-icon.svg" alt="">
+              Add Transaction
+            </button>
+          </div>
+
+        </div>
+
+
+        <div class="dashboard__info">
+          <div class="box dashboard__balance">
+            <p>Balance</p>
+            <h3>&#8369; 24,000.00</h3>
+            <p>Income - Expenses</p>
+          </div>
+          <div class="box dashboard__income">
+            <p>Income</p>
+            <h3>&#8369; 30,000.00</h3>
+            <p>Money received</p>
+          </div>
+          <div class="box dashboard__expenses">
+            <p>Expenses</p>
+            <h3>&#8369; 1400.00</h3>
+            <p>Money spent</p>
+          </div>
+          <div class="box dashboard__transaction">
+            <p>Transaction</p>
+            <h3>6</h3>
+            <p>Transactions this month</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="transaction">
+        
+      </section>
+    </div>
+  </main>
+
+
+</body>
+</html>
