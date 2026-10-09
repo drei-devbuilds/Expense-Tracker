@@ -67,42 +67,53 @@
           </div>
         </div>
       </section>
-      
-      <section class="transaction">
-        <div class="transaction__header">
-          <h2>Transaction</h2>
-          <p>6 entries</p>
-        </div>
+      <div class="filters__container">
+              <section class="transaction">
+                <div class="transaction__header">
+                  <h2>Transaction</h2>
+                  <p>6 entries</p>
+                </div>
+              
+                <div class="transaction__filter">
+                  <p>Search Description</p>
+                  <input type="text" placeholder="Seach transaction">
+                  <img src="./assets/icons/search-icon.svg" alt="">
+                </div>
+              </section>
+              
+              <section class="classification">
+                <fieldset class="filter">
+                  <legend class="filter__label">Transaction type</legend>
+              
+                  <div class="segmented">
+                    <div class="all_filter">
+                      <input type="radio" name="transactionType" id="type-all" value="all" checked />
+                      <label for="type-all">All</label>
+                    </div>
+              
+                    <div class="income_filter">
+                      <input type="radio" name="transactionType" id="type-income" value="income" />
+                      <label for="type-income">Income</label>
+                    </div>
+              
+                    <div class="expenses_filter">
+                      <input type="radio" name="transactionType" id="type-expense" value="expense" />
+                      <label for="type-expense">Expenses</label>
+                    </div>
+                  </div>
+                </fieldset>
+              </section>
 
-        <div class="transaction__filter">
-          <p>Search Description</p>
-          <input type="text" placeholder="Seach transaction">
-          <img src="./assets/icons/search-icon.svg" alt="">
-        </div>
-      </section>
-
-      <section class="classification">
-        <div class="incomeType__container">
-          <fieldset>
-            <legend>Transaction Type</legend>
-            
-            <label class="incomeType__all">
-              <input type="radio" name="income" value="all" checked>
-              <span>All</span>
-            </label>
-
-            <label class="incomeType__income">
-              <input type="radio" name="income" value="income">
-              <span>Income</span>
-            </label>
-
-            <label class="incomeType__expenses">
-              <input type="radio" name="expenses" value="expenses">
-              <span>Expenses</span>
-            </label>
-          </fieldset>
-        </div>
-      </section>
+              <section class="category">
+              <label for="category__label">Category</label>
+              <select class="category__select" id="category" name="category">
+                <option value="">All Categories</option>
+                <option value="food">Food</option>
+                <option value="transport">Transport</option>
+                <option value="bills">Bills</option>
+              </select>
+              </section>
+      </div>
     </div>
   </main>
 

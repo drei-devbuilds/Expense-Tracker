@@ -199,7 +199,7 @@ button{
 .box h3{
   padding: 0;
   margin: 0;
-  font-size: var(--small);
+  font-size: var(--medium);
   font-weight: 600;
 }
 
@@ -218,7 +218,7 @@ button{
 }
 
 .transaction__header p{
-  font-size: var(--extra-small);
+  font-size: 12px;
   margin: 0;
 }
 
@@ -233,7 +233,7 @@ button{
   border-radius: 8px;
   outline: none;
   border: none;
-  padding: 0px 15px;
+  padding: 0px 0px 0px 15px;
   font-size: var(--extra-small);
   color: var(--text);
 }
@@ -250,7 +250,7 @@ button{
   height: var(--large);
   width: var(--large);
   position: absolute;
-  right: 10px;
+  right: 0px;
   top: 50%;
   transform: translate(-50%);
 }
@@ -260,6 +260,111 @@ button{
   font-size: 14px;
   color: var(--muted);
 }
+
+.filter{
+  border: none;
+  padding: 0;
+  margin: 15px 0 0 0;
+}
+
+.filter__label{
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.segmented{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.segmented div{
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--extra-small);
+  background: var(--surface);
+  color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.segmented div label{
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+}
+
+.segmented div:has(input:checked) {
+  background: var(--tint);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.all_filter, .income_filter{
+  border-right: 2px solid var(--border);
+}
+
+
+.segmented div input{
+  position: absolute;
+  opacity: 0; 
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.category{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.category label{
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--muted);
+}
+
+.category select{
+  display: flex;
+  justify-content: space-between;
+  height: 44px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  font-size: var(--extra-small);
+  color: var(--text);
+  padding: 0 15px;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url(./assets/icons/dropdown-icon.svg);
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: var(--large);
+  border: var(--border) 2px solid;
+}
+
+
+.category select option{
+  background: var(--border);
+  font-size: 12px;
+}
+
+.category select option:hover,
+.category select option:focus,
+.category select option:checked {
+  background-color: #e6f2ef;
+  color: #0f766e;
+}
+
 
 /*Small tablets*/
 @media screen and (min-width: 620px) {
