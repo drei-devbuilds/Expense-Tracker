@@ -365,6 +365,45 @@ button{
   color: #0f766e;
 }
 
+.transaction__info{
+  grid-area: info;
+}
+
+.transaction__price {
+  grid-area: price;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+}
+
+.transaction__date {
+  grid-area: date;
+  display: flex;
+  align-items: center;
+}
+
+.transaction__buttons {
+  grid-area: buttons;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.transaction__buttons button{
+  width: 100%;
+}
+
+.transaction__item{
+  margin-top: 10px;
+  display: grid;
+  grid-template-areas: 
+  "info price"
+  "date buttons";
+  row-gap: 10px;
+  border: 1px solid black;
+}
+
 
 /*Small tablets*/
 @media screen and (min-width: 620px) {
