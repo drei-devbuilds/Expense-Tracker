@@ -1,6 +1,7 @@
 /*Variables*/
 :root{
   --primary: #0F766E;
+  --primary-muted: #0c965a18;
   --canvas: #F6F8F7;
   --surface: #FFFFFF;
   --text: #172B2A;
@@ -49,6 +50,9 @@ button{
 
 /*Mobile Styles*/
 .nav{
+  position: sticky;
+  top: 0;
+  background: var(--surface);
   padding: 12px 25px;
   border-bottom: 2px solid var(--border);
 }
@@ -298,6 +302,10 @@ button{
     flex: 1;
     text-align: center;
     cursor: pointer;
+        height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 }
 
 .segmented div:has(input:checked) {
@@ -424,8 +432,7 @@ button{
   font-weight: 600;
 }
 .transaction__edit{
-  background: var(--surface);
-  border: 1px solid var(--primary);
+  background: var(--primary-muted);
 }
 
 .transaction__edit img{
@@ -453,7 +460,6 @@ button{
 .transaction__item{
   background: var(--surface);
   border: none;
-  outline: none;
   border-radius: 8px;
   padding: 15px;
   margin-top: 10px;

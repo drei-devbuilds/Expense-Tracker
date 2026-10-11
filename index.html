@@ -8,7 +8,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/modal.css">
   <title>Expense Tracker</title>
 </head> 
 <body>
@@ -151,9 +152,65 @@
       
         </div>
       </section>
+
+      <div class="modal">
+        <div class="modal__container">
+
+          <div class="modal__title">
+            <h5>Add transaction</h5>
+            <div class="modal__icon">
+                <img src="./assets/icons/close-icon.svg" alt="close modal">
+            </div>
+          </div>
+
+          <div class="modal__filter">
+            <fieldset>
+                  <legend class="filter__label">Transaction type</legend>
+
+                  <div class="modal__filterbody">
+                    <div class="expenses__option">
+                      <input type="radio" name="modalTransaction" value="expense" id="modal-expenses"> 
+                      <label for="modal-expenses">Expenses</label>
+                    </div>
+
+                    <div class="income__option">
+                      <input type="radio" name="modalTransaction" value="income" id="modal-income">
+                      <label for="modal-income">Income</label>
+                    </div>
+
+                  </div>
+            </fieldset>
+          </div>
+
+          <div class="modal__fields">
+            <div class="amount__Field">
+              <label>Amount</label>
+              <input type="text" placeholder="&#8369; 0.00">
+            </div>
+            
+            <div class="category__field">
+              <button type="button" class="dropdown__button">Select Category</button>
+              <ul class="dropdown__options">
+                <li>
+                  <button type="button">Food</button>
+                </li>
+
+                <li>
+                  <button type="button">Bills</button>
+                </li>
+
+                <li>
+                  <button type="button">Transportation</button>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
-
+    <script src="script.js"></script>
 </body>
 </html>

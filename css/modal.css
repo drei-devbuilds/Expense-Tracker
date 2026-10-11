@@ -1,0 +1,118 @@
+.modal{
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.175);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__container{
+  width: 90%;
+    padding: 20px;
+    border-radius: 8px;
+  background: var(--surface);
+}
+
+.modal__title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__title h5{
+  font-size: var(--small);
+}
+
+.modal__title .modal__icon{
+  width: 44px;
+  height: 43px;
+}
+
+.modal__filter fieldset{
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal__filterbody{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(50px, 1fr));
+  border: 2px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: var(--extra-small);
+}
+
+.modal__filterbody div{
+  display: flex;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.modal__filter input{
+position: absolute;
+  /*    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden; */
+    clip: rect(0 0 0 0);
+}
+
+.modal__filterbody div label{
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__filterbody .expenses__option{
+  border-right: 2px solid var(--border);
+}
+
+.modal__filterbody div:has(input:checked){
+    background: var(--tint);
+      color: var(--primary);
+      font-weight: 700;
+}
+
+.amount__field{
+
+}
+
+.category__field{
+  position: relative;
+}
+
+.dropdown__options{
+      position: absolute;
+        top: calc(100%);
+        left: 0;
+        width: 100%;
+      transform: translateY(-8px);
+      opacity: 0;
+      visibility: hidden;
+
+    transition:
+        opacity 200ms ease,
+        transform 200ms ease,
+        visibility 200ms ease;
+}
+
+
+.dropdown__options.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
