@@ -9,9 +9,11 @@
   --tint: #EAF5F2;
   --income: #187044;
   --expense: #B42318;
+  --expense-muted: #b4221811;
   --backdrop: #172B2A66;
 
   /*font sizes*/
+  --smallest: 13px;
   --extra-small: 15px;
   --small: 18px;
   --medium: 20px;
@@ -369,6 +371,17 @@ button{
   grid-area: info;
 }
 
+.transaction__info .transaction__title{
+  font-size: var(--small);
+  color: var(--text);
+}
+
+.transaction__category {
+  font-size: var(--smallest);
+  color: #647470;
+  font-weight: 400;
+}
+
 .transaction__price {
   grid-area: price;
   display: flex;
@@ -377,10 +390,22 @@ button{
   align-items: end;
 }
 
+.transaction__price .transaction__amount{
+  color: var(--expense);
+  font-size: var(--medium);
+}
+
 .transaction__date {
   grid-area: date;
   display: flex;
   align-items: center;
+  justify-content: start;
+}
+
+.transaction__date p{
+  font-size: var(--smallest);
+  color: var(--muted);
+  font-weight: 400;
 }
 
 .transaction__buttons {
@@ -392,16 +417,52 @@ button{
 
 .transaction__buttons button{
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+.transaction__edit{
+  background: var(--surface);
+  border: 1px solid var(--primary);
+}
+
+.transaction__edit img{
+  height: 20px;
+}
+
+.transaction__edit p{
+  margin-top: 2px;
+}
+
+.transaction__delete{
+  background: var(--expense-muted);
+}
+
+
+.transaction__delete img {
+  height: 20px;
+}
+
+.transaction__delete p {
+  margin-top: 0;
+  color: var(--expense);
 }
 
 .transaction__item{
+  background: var(--surface);
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 15px;
   margin-top: 10px;
   display: grid;
   grid-template-areas: 
-  "info price"
-  "date buttons";
-  row-gap: 10px;
-  border: 1px solid black;
+  "info price price"
+  "date buttons buttons";
+  row-gap: 20px;
+  border: 2px solid var(--border);
 }
 
 
