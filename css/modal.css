@@ -4,7 +4,7 @@
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.175);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -88,14 +88,48 @@ position: absolute;
 }
 
 .amount__field{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
 
+.amount__field input{
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 15px;
+  margin: 10px 0 0 0;
 }
 
 .category__field{
   position: relative;
 }
 
+.dropdown__button{
+  width: 100%;
+  border-radius: 0;
+  border-start-end-radius: 8px;
+  border-start-start-radius: 8px;
+  background: var(--surface);
+    border: 1px solid var(--border);
+  font-weight: 400;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  margin: 10px 0px;
+  }
+
+  .dropdown__button img{
+    width: 25px;
+    height: 25px;
+  }
+
 .dropdown__options{
+  border-end-end-radius: 8px;
+  border-end-start-radius: 8px;
+  overflow: hidden;
       position: absolute;
         top: calc(100%);
         left: 0;
@@ -115,4 +149,38 @@ position: absolute;
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+.dropdown__options li button{
+  width: 100%;
+  border-radius: 0;
+  font-weight: 400;
+  color: var(--muted);
+  display: flex;
+  padding: 0 15px;
+  justify-content: start;
+  align-items: center;
+  background-color: var(--surface);
+}
+
+.modal__buttons{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal__buttons button{
+  width: 50%;
+}
+
+.modal__buttons .submit__button{
+  color: var(--surface);
+  background: var(--primary);
+}
+
+.modal__buttons .cancel__button{
+  background: none;
+  border: 2px solid var(--border);
 }
