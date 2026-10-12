@@ -1,0 +1,29 @@
+.alert{
+  background: var(--surface);
+  width: 150px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  gap: 10px;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.alert__active{
+  display: flex;
+}
+
+.alert img{
+  height: 30px;
+  width: 30px;
+}
+
+.alert p{
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
