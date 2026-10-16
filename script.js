@@ -8,6 +8,7 @@ const incomeRadio = document.querySelector('#modal-income')
 const expensesButton = document.querySelector('.expenses__label');
 const incomeButton = document.querySelector('.income__label');
 
+const categoryContainer = document.querySelector('.category__field')
 const modalFieldset = document.querySelector('.modal__fieldset');
 const modalDropdown = document.querySelector('.dropdown__button');
 let modalDropdownOptions = document.querySelector('.dropdown__options');
@@ -50,11 +51,18 @@ expensesRadio.addEventListener('click', (e) => {
   } 
 })
 
-
-
-modalDropdown.addEventListener('click', () => {
+//working custom dropdown
+categoryContainer.addEventListener('click', (e) => {
   modalDropdownOptions.classList.toggle('active')
+  console.log(e.target)
+  if (e.target.classList.value == 'option__button'){
+      let selected = e.target.textContent;
+      modalDropdown.firstElementChild.textContent = selected
+    }
 })
+
+
+
 
 //Modal
 const openModal = () => {
@@ -84,7 +92,7 @@ const expensesOptions = ['Food', 'Medecine', 'Supplies', 'Plants'];
 const incomeDropdown = () => {
   incomeOptions.forEach(item => {
     const li = document.createElement('li')
-    li.innerHTML = `<button type="button" data-category="${item}">${item}</button>`
+    li.innerHTML = `<button type="button" class="option__button" data-category="${item}">${item}</button>`
     modalDropdownOptions.prepend(li)
   })
 }
@@ -93,7 +101,7 @@ const incomeDropdown = () => {
 const expensesDropdown = () => {
   expensesOptions.forEach(item => {
     const li = document.createElement('li')
-    li.innerHTML = `<button type="button" data-category="${item}">${item}</button>`
+    li.innerHTML = `<button type="button" class="option__button" data-category="${item}">${item}</button>`
     modalDropdownOptions.prepend(li)
   })
 }
