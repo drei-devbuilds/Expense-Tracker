@@ -7,6 +7,7 @@ const expensesRadio = document.querySelector('#modal-expenses')
 const incomeRadio = document.querySelector('#modal-income')
 const expensesButton = document.querySelector('.expenses__label');
 const incomeButton = document.querySelector('.income__label');
+const amount = document.querySelector('amount__input')
 
 const categoryContainer = document.querySelector('.category__field')
 const modalFieldset = document.querySelector('.modal__fieldset');
@@ -112,7 +113,7 @@ const createData = (transactionType) => {
   const data = {
     date: transactionDate(),
     transactionType: transactionType,
-    amount: sadasd,
+    amount: amount,
     category: fdsfd
   }
 }
