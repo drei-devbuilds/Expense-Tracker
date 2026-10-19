@@ -7,14 +7,18 @@ const expensesRadio = document.querySelector('#modal-expenses')
 const incomeRadio = document.querySelector('#modal-income')
 const expensesButton = document.querySelector('.expenses__label');
 const incomeButton = document.querySelector('.income__label');
-const amount = document.querySelector('amount__input')
+const amount = document.querySelector('.amount__input')
 
 const categoryContainer = document.querySelector('.category__field')
 const modalFieldset = document.querySelector('.modal__fieldset');
 const modalDropdown = document.querySelector('.dropdown__button');
 let modalDropdownOptions = document.querySelector('.dropdown__options');
-
+let selectedOption = '';
 let transactionType = '';
+
+
+const incomeOptions = ['Salary', 'Sale', 'Commissions'];
+const expensesOptions = ['Food', 'Medecine', 'Supplies', 'Plants'];
 
 //Opens modal for adding transactions
 addButton.addEventListener('click', (e) => {
@@ -22,18 +26,23 @@ addButton.addEventListener('click', (e) => {
 
   if (expensesRadio.checked) {
     modalDropdownOptions.innerHTML = '';
-    expensesDropdown()
+    dynamicDropdown(expensesOptions)
+    getData('expense')
   } else {
     alert('invalid option')
   } 
 
 })
 
-//modal dynamic dropdown options
+//Choose between expenses and income on transactions
+//default is expenses
+//after choosing the category options would also change
+
+//income option
 incomeRadio.addEventListener('click', (e) => {
     if(incomeRadio.checked){
       modalDropdownOptions.innerHTML = '';
-      incomeDropdown()
+      dynamicDropdown(incomeOptions)
       transactionType = 'income';
       getData(transactionType)
     }else{
@@ -41,10 +50,12 @@ incomeRadio.addEventListener('click', (e) => {
     }
 })
 
+
+//expenses option
 expensesRadio.addEventListener('click', (e) => {
   if (expensesRadio.checked) {
     modalDropdownOptions.innerHTML = '';
-    expensesDropdown()
+    dynamicDropdown(expensesOptions)
     transactionType = 'expense';
     getData(transactionType)
   } else {
@@ -52,29 +63,37 @@ expensesRadio.addEventListener('click', (e) => {
   } 
 })
 
+//Income Dropdown Function
+const dynamicDropdown = (options) => {
+  options.forEach(item => {
+    const li = document.createElement('li')
+    li.innerHTML = `<button type="button" class="option__button" data-category="${item}">${item}</button>`
+    modalDropdownOptions.prepend(li)
+  })
+}
+
 //working custom dropdown
+//what ever option you choose would change the text inside the parent option button
 categoryContainer.addEventListener('click', (e) => {
   modalDropdownOptions.classList.toggle('active')
-  console.log(e.target)
   if (e.target.classList.value == 'option__button'){
-      let selected = e.target.textContent;
-      modalDropdown.firstElementChild.textContent = selected
+      selectedOption = e.target.textContent;
+      modalDropdown.firstElementChild.textContent = selectedOption;
     }
 })
 
 
-
-
-//Modal
+//open the modal
 const openModal = () => {
   modal.style.display = 'flex'
 }
 
+//close the modal
 const closeModal = () => {
   modal.style.display = 'none'
 }
 
-//Get Date
+//to get the current date of the transaction
 const transactionDate = ()=> {
   const today = new Date();
 
@@ -86,34 +105,20 @@ const transactionDate = ()=> {
   return transactionDate
 }
 
-const incomeOptions = ['Salary', 'Sale', 'Commissions'];
-const expensesOptions = ['Food', 'Medecine', 'Supplies', 'Plants'];
 
-//Income Dropdown Function
-const incomeDropdown = () => {
-  incomeOptions.forEach(item => {
-    const li = document.createElement('li')
-    li.innerHTML = `<button type="button" class="option__button" data-category="${item}">${item}</button>`
-    modalDropdownOptions.prepend(li)
-  })
-}
-
-//Expenses Dropdown Function
-const expensesDropdown = () => {
-  expensesOptions.forEach(item => {
-    const li = document.createElement('li')
-    li.innerHTML = `<button type="button" class="option__button" data-category="${item}">${item}</button>`
-    modalDropdownOptions.prepend(li)
-  })
-}
-
+//get the data
+const getData = (transactionType) => {
+    console.log(transactionType)
+    console.log(amount.value)
+    console.log(selectedOption)
+} 
 
 //Create Data
-const createData = (transactionType) => {
-  const data = {
-    date: transactionDate(),
-    transactionType: transactionType,
-    amount: amount,
-    category: fdsfd
-  }
-}
+// const createData = (transactionType) => {
+//   const data = {
+//     date: transactionDate(),
+//     transactionType: transactionType,
+//     amount: amount,
+//     category: modalDropdown.value
+//   }
+// }
