@@ -26,7 +26,7 @@
   font-size: var(--small);
 }
 
-.modal__title .modal__icon{
+.modal__title .modal-close__icon{
   width: 44px;
   height: 43px;
 }

@@ -1,20 +1,25 @@
 const addButton = document.querySelector('.add__button')
 
 //modal
-const modal = document.querySelector('.modal');
-const modalContainer = document.querySelector('.modal__container');
-const expensesRadio = document.querySelector('#modal-expenses')
-const incomeRadio = document.querySelector('#modal-income')
-const expensesButton = document.querySelector('.expenses__label');
-const incomeButton = document.querySelector('.income__label');
-const amount = document.querySelector('.amount__input')
-
-const categoryContainer = document.querySelector('.category__field')
+const modal = document.querySelector('.modal')
+const amount = document.querySelector('.amount__input');
+const modalCloseIcon = document.querySelector('.modal-close__icon');
+const categoryContainer = document.querySelector('.category__field');
 const modalFieldset = document.querySelector('.modal__fieldset');
 const modalDropdown = document.querySelector('.dropdown__button');
 let modalDropdownOptions = document.querySelector('.dropdown__options');
+const submitButton = document.querySelector('.submit__button')
+
+
+//alert container
+const alertContainer = document.querySelector('.alert')
+const alertImage = document.querySelector('.alert__image');
+const alertText = document.querySelector('.alert__text');
+
+
 let selectedOption = '';
 let transactionType = '';
+let alertTimeout = null;
 
 
 const incomeOptions = ['Salary', 'Sale', 'Commissions'];
@@ -23,44 +28,22 @@ const expensesOptions = ['Food', 'Medecine', 'Supplies', 'Plants'];
 //Opens modal for adding transactions
 addButton.addEventListener('click', (e) => {
   openModal()
-
-  if (expensesRadio.checked) {
-    modalDropdownOptions.innerHTML = '';
-    dynamicDropdown(expensesOptions)
-    getData('expense')
-  } else {
-    alert('invalid option')
-  } 
-
 })
 
 //Choose between expenses and income on transactions
 //default is expenses
 //after choosing the category options would also change
 
-//income option
-incomeRadio.addEventListener('click', (e) => {
-    if(incomeRadio.checked){
-      modalDropdownOptions.innerHTML = '';
+modalFieldset.addEventListener('change', (e) => {
+  modalDropdownOptions.innerHTML = '';
+  if(e.target.matches('input[type="radio"]')){
+    transactionType = e.target.value
+    if(transactionType === 'expense'){
+      dynamicDropdown(expensesOptions)
+    } else if (transactionType === 'income') {
       dynamicDropdown(incomeOptions)
-      transactionType = 'income';
-      getData(transactionType)
-    }else{
-      alert('invalid option')
     }
-})
-
-
-//expenses option
-expensesRadio.addEventListener('click', (e) => {
-  if (expensesRadio.checked) {
-    modalDropdownOptions.innerHTML = '';
-    dynamicDropdown(expensesOptions)
-    transactionType = 'expense';
-    getData(transactionType)
-  } else {
-    alert('invalid option')
-  } 
+  }
 })
 
 //Income Dropdown Function
@@ -82,14 +65,26 @@ categoryContainer.addEventListener('click', (e) => {
     }
 })
 
+submitButton.addEventListener('click', (e) => {
+  console.log('submit clicked')
+  getData()
+})
+
+modalCloseIcon.addEventListener('click', () => {
+  closeModal()
+})
+
 
 //open the modal
 const openModal = () => {
-  modal.style.display = 'flex'
+  modal.style.display = 'flex';
 }
 
 //close the modal
 const closeModal = () => {
+  transactionType = 'expense';
+  selectedOption = '';
+  amount.value = '';
   modal.style.display = 'none'
 }
 
@@ -107,18 +102,32 @@ const transactionDate = ()=> {
 
 
 //get the data
-const getData = (transactionType) => {
-    console.log(transactionType)
-    console.log(amount.value)
-    console.log(selectedOption)
+const getData = () => {
+  alertTimeout = null;
+  if(amount.value === ''){
+    openAlert('error', 'Invalid Amount')
+    alertTimeout = setTimeout(() => closeAlert(), 3000)
+  }
+
+  if(transactionType === ''){
+    openAlert('error', 'Invalid Transaction type')
+    alertTimeout = setTimeout(() => closeAlert(), 3000)
+  }
 } 
 
-//Create Data
-// const createData = (transactionType) => {
-//   const data = {
-//     date: transactionDate(),
-//     transactionType: transactionType,
-//     amount: amount,
-//     category: modalDropdown.value
-//   }
-// }
+
+const openAlert = (alertType, message) => {
+  alertContainer.style.display = 'flex';
+  if(alertType === 'error'){
+    alertImage.src = './assets/icons/error-icon.svg';
+    alertText.textContent = message
+    alertText.style.color = '#B42318'
+  }else{
+    alertImage.src = './assets/icons/check-icon.svg';
+    alertText.textContent = message
+  }
+}
+
+const closeAlert = () => {
+  alertContainer.style.display = 'none';
+}
