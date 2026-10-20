@@ -1,3 +1,4 @@
+const ul = document.querySelector('.transaction__container ul')
 const addButton = document.querySelector('.add__button')
 
 //modal
@@ -24,6 +25,7 @@ let alertTimeout = null;
 
 const incomeOptions = ['Salary', 'Sale', 'Commissions'];
 const expensesOptions = ['Food', 'Medecine', 'Supplies', 'Plants'];
+
 
 //Opens modal for adding transactions
 addButton.addEventListener('click', (e) => {
@@ -103,16 +105,97 @@ const transactionDate = ()=> {
 
 //get the data
 const getData = () => {
-  alertTimeout = null;
-  if(amount.value === ''){
-    openAlert('error', 'Invalid Amount')
-    alertTimeout = setTimeout(() => closeAlert(), 3000)
-  }
 
   if(transactionType === ''){
-    openAlert('error', 'Invalid Transaction type')
+    openAlert('error', 'Choose Transaction type')
     alertTimeout = setTimeout(() => closeAlert(), 3000)
+    return
   }
+
+  clearTimeout(alertTimeout)
+  if (amount.value.trim() === '' || Number(amount.value) <= 0 || !Number.isFinite(Number(amount.value))){
+    openAlert('error', 'Empty Amount')
+    alertTimeout = setTimeout(() => closeAlert(), 3000)
+    return
+  }
+
+
+  if (selectedOption === '') {
+    openAlert('error', 'Empty Category')
+    alertTimeout = setTimeout(() => closeAlert(), 3000)
+    return
+  }
+
+  const transaction = {
+    date: transactionDate(),
+    type: transactionType,
+    amount: amount.value,
+    category: selectedOption
+  } 
+  storeData(transaction)
+} 
+
+const storeData = (transactionData) => {
+  clearTimeout(alertTimeout)
+  let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+  transactions.push(transactionData);
+
+  localStorage.setItem('transactions', JSON.stringify(transactions));
+
+  openAlert('success', 'Successfully Added')
+  alertTimeout = setTimeout(() => closeAlert(), 2000)
+  closeModal()
+}
+
+
+const getStoredData = () => {
+  const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+  return transactions
+}
+
+
+const createListItem = () => {
+  const transactionData = getStoredData()
+
+  transactionData.forEach((item) => {
+    console.log(item)
+    console.log(item.amount)
+  })
+  // ul.innerHTML = transactionData.map(transaction => {
+  //   return 
+  //   `
+  //    <li class="transaction__item">
+
+  //             <div class="transaction__info">
+  //               <h4 class="transaction__title">${transaction.name}</h4>
+  //               <p class="transaction__category">${transaction.category}</p>
+  //             </div>
+
+  //             <div class="transaction__price">
+  //               <h5 class="transaction__amount">-&#8369;${transaction.amount}</h5>
+  //               <p class="transaction__category">${transaction.type}</p>
+  //             </div>
+
+  //             <div class="transaction__date">
+  //               <p>${transaction.date}</p>
+  //             </div>
+
+  //             <div class="transaction__buttons">
+  //               <button class="transaction__edit">
+  //                 <img src="./assets/icons/edit-icon.svg" alt="">
+  //                 <p>Edit</p>
+  //               </button>
+  //               <button class="transaction__delete">
+  //                 <img src="./assets/icons/delete-icon.svg" alt="">
+  //                 <p>Delete</p>
+  //               </button>
+  //             </div>
+
+  //   </li>
+  //   `;
+  // }).join('');
 } 
 
 
