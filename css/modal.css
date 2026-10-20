@@ -101,6 +101,20 @@ position: absolute;
   margin: 10px 0 0 0;
 }
 
+.name__field {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.name__field input {
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 15px;
+  margin: 10px 0 0 0;
+}
+
 .category__field{
   position: relative;
 }

@@ -4,6 +4,8 @@ const addButton = document.querySelector('.add__button')
 //modal
 const modal = document.querySelector('.modal')
 const amount = document.querySelector('.amount__input');
+const transactionName = document.querySelector('.name__input');
+
 const modalCloseIcon = document.querySelector('.modal-close__icon');
 const categoryContainer = document.querySelector('.category__field');
 const modalFieldset = document.querySelector('.modal__fieldset');
@@ -70,6 +72,7 @@ categoryContainer.addEventListener('click', (e) => {
 submitButton.addEventListener('click', (e) => {
   console.log('submit clicked')
   getData()
+  createListItem()
 })
 
 modalCloseIcon.addEventListener('click', () => {
@@ -85,6 +88,7 @@ const openModal = () => {
 //close the modal
 const closeModal = () => {
   transactionType = 'expense';
+  transactionName.value = '';
   selectedOption = '';
   amount.value = '';
   modal.style.display = 'none'
@@ -106,13 +110,20 @@ const transactionDate = ()=> {
 //get the data
 const getData = () => {
 
+  clearTimeout(alertTimeout)
   if(transactionType === ''){
     openAlert('error', 'Choose Transaction type')
     alertTimeout = setTimeout(() => closeAlert(), 3000)
     return
   }
 
-  clearTimeout(alertTimeout)
+
+  if (transactionName.value.trim() === ''){
+    openAlert('error', 'Empty Title')
+    alertTimeout = setTimeout(() => closeAlert(), 3000)
+    return
+  }
+
   if (amount.value.trim() === '' || Number(amount.value) <= 0 || !Number.isFinite(Number(amount.value))){
     openAlert('error', 'Empty Amount')
     alertTimeout = setTimeout(() => closeAlert(), 3000)
@@ -129,6 +140,7 @@ const getData = () => {
   const transaction = {
     date: transactionDate(),
     type: transactionType,
+    name: transactionName.value,
     amount: amount.value,
     category: selectedOption
   } 
@@ -156,48 +168,45 @@ const getStoredData = () => {
 }
 
 
+
 const createListItem = () => {
   const transactionData = getStoredData()
 
-  transactionData.forEach((item) => {
-    console.log(item)
-    console.log(item.amount)
-  })
-  // ul.innerHTML = transactionData.map(transaction => {
-  //   return 
-  //   `
-  //    <li class="transaction__item">
+  ul.innerHTML = transactionData.map(transaction => {
+    return `
+     <li class="transaction__item">
 
-  //             <div class="transaction__info">
-  //               <h4 class="transaction__title">${transaction.name}</h4>
-  //               <p class="transaction__category">${transaction.category}</p>
-  //             </div>
+              <div class="transaction__info">
+                <h4 class="transaction__title">${transaction.name}</h4>
+                <p class="transaction__category">${transaction.category}</p>
+              </div>
 
-  //             <div class="transaction__price">
-  //               <h5 class="transaction__amount">-&#8369;${transaction.amount}</h5>
-  //               <p class="transaction__category">${transaction.type}</p>
-  //             </div>
+              <div class="transaction__price">
+                <h5 class="transaction__amount">-&#8369;${transaction.amount}</h5>
+                <p class="transaction__category">${transaction.type}</p>
+              </div>
 
-  //             <div class="transaction__date">
-  //               <p>${transaction.date}</p>
-  //             </div>
+              <div class="transaction__date">
+                <p>${transaction.date}</p>
+              </div>
 
-  //             <div class="transaction__buttons">
-  //               <button class="transaction__edit">
-  //                 <img src="./assets/icons/edit-icon.svg" alt="">
-  //                 <p>Edit</p>
-  //               </button>
-  //               <button class="transaction__delete">
-  //                 <img src="./assets/icons/delete-icon.svg" alt="">
-  //                 <p>Delete</p>
-  //               </button>
-  //             </div>
+              <div class="transaction__buttons">
+                <button class="transaction__edit">
+                  <img src="./assets/icons/edit-icon.svg" alt="">
+                  <p>Edit</p>
+                </button>
+                <button class="transaction__delete">
+                  <img src="./assets/icons/delete-icon.svg" alt="">
+                  <p>Delete</p>
+                </button>
+              </div>
 
-  //   </li>
-  //   `;
-  // }).join('');
+    </li>
+    `
+  }).join('');
 } 
 
+createListItem()
 
 const openAlert = (alertType, message) => {
   alertContainer.style.display = 'flex';
