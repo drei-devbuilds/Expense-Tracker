@@ -176,32 +176,37 @@ const createListItem = () => {
     return `
      <li class="transaction__item">
 
-              <div class="transaction__info">
-                <h4 class="transaction__title">${transaction.name}</h4>
-                <p class="transaction__category">${transaction.category}</p>
+              <div class="transaction__top">
+                <div class="transaction__info">
+                  <h4 class="transaction__title">${transaction.name}</h4>
+                  <p class="transaction__category">${transaction.category}</p>
+                </div>
+                
+                <div class="transaction__price">
+                  <h5 class="transaction__amount">-&#8369;${transaction.amount}</h5>
+                  <p class="transaction__category">${transaction.type}</p>
+                </div>
               </div>
 
-              <div class="transaction__price">
-                <h5 class="transaction__amount">-&#8369;${transaction.amount}</h5>
-                <p class="transaction__category">${transaction.type}</p>
+              
+              <div class="transaction__bottom">
+                <div class="transaction__date">
+                  <p>${transaction.date}</p>
+                </div>
+                
+                <div class="transaction__buttons">
+                  <button class="transaction__edit">
+                    <img src="./assets/icons/edit-icon.svg" alt="">
+                    <p>Edit</p>
+                  </button>
+                  <button class="transaction__delete">
+                    <img src="./assets/icons/delete-icon.svg" alt="">
+                    <p>Delete</p>
+                  </button>
+                </div>
               </div>
 
-              <div class="transaction__date">
-                <p>${transaction.date}</p>
-              </div>
-
-              <div class="transaction__buttons">
-                <button class="transaction__edit">
-                  <img src="./assets/icons/edit-icon.svg" alt="">
-                  <p>Edit</p>
-                </button>
-                <button class="transaction__delete">
-                  <img src="./assets/icons/delete-icon.svg" alt="">
-                  <p>Delete</p>
-                </button>
-              </div>
-
-    </li>
+            </li>
     `
   }).join('');
 } 
