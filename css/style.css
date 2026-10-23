@@ -452,6 +452,9 @@ button{
   height: 20px;
 }
 
+.list__header{
+  display: none;
+}
 .transaction__delete p {
   margin-top: 0;
   color: var(--expense);
@@ -481,7 +484,12 @@ button{
 
 /*Small tablets*/
 @media screen and (min-width: 620px) {
-  
+    .list__header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 10px;
+        gap: 50px;
+      }
 }
 
 /*Large Tablets and laptop*/
@@ -518,6 +526,76 @@ button{
     padding: 0 16px;
     letter-spacing: 0.09em;
     font-weight: 600;
+  }
+
+  .dashboard__info .box{
+    padding: 25px;
+  }
+  .box h3{
+    font-size: var(--large);
+  }
+
+  .box p{
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .transaction__item{
+    grid-template-columns: 1fr 500px;
+    column-gap: 50px;
+    padding: 20px 20px;
+  }
+
+  .transaction__info{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .transaction__bottom{
+    grid-template-columns: auto auto;
+    column-gap: 50px;
+  }
+
+  .transaction__buttons button{
+    padding: 15px 25px;
+  }
+
+  .transaction__top{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .transaction__price{
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .list__header{
+    display: grid;
+    grid-template-columns: 1fr 500px;
+    padding: 10px;
+    gap: 50px;
+  }
+
+  .list__info--header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+
+  .list__actions--header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  }
+
+  .inner__info--header{
+    display: flex;
+    justify-content: space-around;
   }
 }
 
