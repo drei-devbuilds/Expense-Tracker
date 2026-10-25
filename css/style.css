@@ -488,7 +488,7 @@ button{
         display: grid;
         grid-template-columns: 1fr 1fr;
         padding: 10px;
-        gap: 50px;
+        gap: 25px;
       }
 }
 
@@ -539,10 +539,14 @@ button{
     font-size: 13px;
     color: var(--muted);
   }
+  
+  .transaction__date{
+    justify-content: end;
+  }
 
   .transaction__item{
     grid-template-columns: 1fr 500px;
-    column-gap: 50px;
+    column-gap: 0;
     padding: 20px 20px;
   }
 
@@ -572,6 +576,7 @@ button{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    gap: 50px;
   }
 
   .list__header{
