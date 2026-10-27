@@ -1,4 +1,5 @@
 const ul = document.querySelector('.transaction__container ul')
+
 const addButton = document.querySelector('.add__button')
 
 //modal
@@ -164,6 +165,8 @@ const storeData = (transactionData) => {
 const getStoredData = () => {
   const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 
+  transactions.reverse()
+
   return transactions
 }
 
@@ -227,4 +230,20 @@ const openAlert = (alertType, message) => {
 
 const closeAlert = () => {
   alertContainer.style.display = 'none';
+}
+
+
+const Items = document.querySelectorAll('.transaction__item')
+
+const searchItems = (searchValue) => {
+  Array.from(Items).forEach(item => {
+    const itemTitle = item.firstElementChild.firstElementChild.firstElementChild.textContent.trim().toLowerCase()
+
+    if (itemTitle.includes(searchValue)){
+      item.style.display = ''
+    }else{
+      item.style.display = 'none'
+    }
+
+  })
 }
