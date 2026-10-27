@@ -1,5 +1,5 @@
-const ul = document.querySelector('.transaction__container ul')
 
+const ul = document.querySelector('.transaction__container ul')
 const addButton = document.querySelector('.add__button')
 
 //modal
@@ -14,6 +14,8 @@ const modalDropdown = document.querySelector('.dropdown__button');
 let modalDropdownOptions = document.querySelector('.dropdown__options');
 const submitButton = document.querySelector('.submit__button')
 
+//Search Input
+const searchInput = document.querySelector('.transaction__filter input')
 
 //alert container
 const alertContainer = document.querySelector('.alert')
@@ -70,6 +72,14 @@ categoryContainer.addEventListener('click', (e) => {
     }
 })
 
+//Search Add event Listner
+
+searchInput.addEventListener('input', () => {
+  let searchValue = searchInput.value.trim().toLowerCase()
+
+  searchItems(searchValue)
+})
+
 submitButton.addEventListener('click', (e) => {
   console.log('submit clicked')
   getData()
@@ -79,6 +89,8 @@ submitButton.addEventListener('click', (e) => {
 modalCloseIcon.addEventListener('click', () => {
   closeModal()
 })
+
+
 
 
 //open the modal
