@@ -22,6 +22,9 @@ const alertContainer = document.querySelector('.alert')
 const alertImage = document.querySelector('.alert__image');
 const alertText = document.querySelector('.alert__text');
 
+//category filter
+const typeField = document.querySelector('.filter')
+
 
 let selectedOption = '';
 let transactionType = '';
@@ -256,6 +259,35 @@ const searchItems = (searchValue) => {
     }else{
       item.style.display = 'none'
     }
+
+  })
+}
+
+
+typeField.addEventListener('change', (e) => {
+  console.log("type field changed")
+
+  if (e.target.matches('input[type="radio"]')){
+      transactionTypeFilter(e.target.value)
+    }
+  }
+)
+
+const transactionTypeFilter = (transTypeValue) => {
+  Array.from(Items).forEach((item) => {
+    const itemTransType = item.firstElementChild.children[1].children[1].textContent.trim().toLocaleLowerCase()
+
+    if(transTypeValue.toLocaleLowerCase().trim() === 'all'){
+      item.style.display = ''
+      return
+    }
+
+     if(itemTransType === transTypeValue.toLocaleLowerCase().trim()){
+        item.style.display = ''
+     }
+     else{
+        item.style.display = 'none'
+     }
 
   })
 }
