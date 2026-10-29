@@ -396,6 +396,7 @@ button{
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   align-items: end;
 }
 
@@ -479,17 +480,13 @@ button{
 .transaction__bottom{
   display: grid;
   grid-template-rows: auto 1fr;
+  align-items: center;
 }
 
 
 /*Small tablets*/
 @media screen and (min-width: 620px) {
-    .list__header {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        padding: 10px;
-        gap: 25px;
-      }
+
 }
 
 /*Large Tablets and laptop*/
@@ -498,6 +495,12 @@ button{
     grid-template-areas: 'add header';
   }
 
+            .list__header {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              padding: 10px;
+              gap: 25px;
+            }
   .dashboard__info {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -561,6 +564,7 @@ button{
 
   .transaction__bottom{
     grid-template-columns: auto auto;
+    grid-template-rows: auto;
     column-gap: 50px;
   }
 
@@ -576,9 +580,8 @@ button{
 
   .transaction__price{
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    gap: 50px;
   }
 
   .list__header{
@@ -620,4 +623,13 @@ button{
 /*Desktop*/
 @media screen and (min-width: 1200px) {
 
+      .transaction__price {
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: center;
+        }
+      .inner__info--header {
+          display: flex;
+          justify-content: space-around;
+        }
 }
