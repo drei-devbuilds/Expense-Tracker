@@ -26,14 +26,28 @@ const alertText = document.querySelector('.alert__text');
 const typeField = document.querySelector('.filter')
 
 
+
+
+
 let selectedOption = '';
 let transactionType = '';
 let alertTimeout = null;
-
+let currentEdit = null;
 
 const incomeOptions = ['Salary', 'Sale', 'Commissions'];
 const expensesOptions = ['Food', 'Medecine', 'Supplies', 'Plants'];
 
+// Edit modal
+ul.addEventListener('click', (e) => {
+
+  const editButton = e.target.closest('.transaction__edit')
+
+  if (!editButton) return;
+  currentEdit = editButton.closest('.transaction__item')
+
+  openModal()
+
+})
 
 //Opens modal for adding transactions
 addButton.addEventListener('click', (e) => {
@@ -82,6 +96,49 @@ searchInput.addEventListener('input', () => {
 
   searchItems(searchValue)
 })
+
+
+const createListItem = () => {
+  const transactionData = getStoredData()
+
+  ul.innerHTML = transactionData.map(transaction => {
+    return `
+     <li class="transaction__item">
+
+              <div class="transaction__top">
+                <div class="transaction__info">
+                  <h4 class="transaction__title">${transaction.name}</h4>
+                  <p class="transaction__category">${transaction.category}</p>
+                </div>
+                
+                <div class="transaction__price">
+                  <h5 class="transaction__amount">-&#8369;${transaction.amount}</h5>
+                  <p class="transaction__category">${transaction.type}</p>
+                </div>
+              </div>
+
+              
+              <div class="transaction__bottom">
+                <div class="transaction__date">
+                  <p>${transaction.date}</p>
+                </div>
+                
+                <div class="transaction__buttons">
+                  <button class="transaction__edit" data-id="${transaction.id}">
+                    <img src="./assets/icons/edit-icon.svg" alt="">
+                    <p>Edit</p>
+                  </button>
+                  <button class="transaction__delete">
+                    <img src="./assets/icons/delete-icon.svg" alt="">
+                    <p>Delete</p>
+                  </button>
+                </div>
+              </div>
+
+            </li>
+    `
+  }).join('');
+} 
 
 submitButton.addEventListener('click', (e) => {
   console.log('submit clicked')
@@ -154,6 +211,7 @@ const getData = () => {
   }
 
   const transaction = {
+    id: crypto.randomUUID(),
     date: transactionDate(),
     type: transactionType,
     name: transactionName.value,
@@ -187,47 +245,6 @@ const getStoredData = () => {
 
 
 
-const createListItem = () => {
-  const transactionData = getStoredData()
-
-  ul.innerHTML = transactionData.map(transaction => {
-    return `
-     <li class="transaction__item">
-
-              <div class="transaction__top">
-                <div class="transaction__info">
-                  <h4 class="transaction__title">${transaction.name}</h4>
-                  <p class="transaction__category">${transaction.category}</p>
-                </div>
-                
-                <div class="transaction__price">
-                  <h5 class="transaction__amount">-&#8369;${transaction.amount}</h5>
-                  <p class="transaction__category">${transaction.type}</p>
-                </div>
-              </div>
-
-              
-              <div class="transaction__bottom">
-                <div class="transaction__date">
-                  <p>${transaction.date}</p>
-                </div>
-                
-                <div class="transaction__buttons">
-                  <button class="transaction__edit">
-                    <img src="./assets/icons/edit-icon.svg" alt="">
-                    <p>Edit</p>
-                  </button>
-                  <button class="transaction__delete">
-                    <img src="./assets/icons/delete-icon.svg" alt="">
-                    <p>Delete</p>
-                  </button>
-                </div>
-              </div>
-
-            </li>
-    `
-  }).join('');
-} 
 
 createListItem()
 
@@ -291,3 +308,4 @@ const transactionTypeFilter = (transTypeValue) => {
 
   })
 }
+
