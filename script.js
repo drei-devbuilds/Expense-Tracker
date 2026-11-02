@@ -4,14 +4,17 @@ const addButton = document.querySelector('.add__button')
 
 //modal
 const modal = document.querySelector('.modal')
-const amount = document.querySelector('.amount__input');
-const transactionName = document.querySelector('.name__input');
+const amount = document.querySelector('.amount__input'); //amount input on modal
+const transactionName = document.querySelector('.name__input'); //name Input on modal
+const modalExpensesInput = document.querySelector('#modal-expenses') //Modal Expenses Field on Category
+const modalIncomeInput = document.querySelector('#modal-income') //Modal Income Field on Category
+const modalDropdown = document.querySelector('.dropdown__button'); // Modal Dropdown
+let modalDropdownOptions = document.querySelector('.dropdown__options');
 
 const modalCloseIcon = document.querySelector('.modal-close__icon');
 const categoryContainer = document.querySelector('.category__field');
-const modalFieldset = document.querySelector('.modal__fieldset');
-const modalDropdown = document.querySelector('.dropdown__button');
-let modalDropdownOptions = document.querySelector('.dropdown__options');
+const modalFieldset = document.querySelector('.modal__fieldset'); //modal fieldset
+
 const submitButton = document.querySelector('.submit__button')
 
 //Search Input
@@ -25,10 +28,6 @@ const alertText = document.querySelector('.alert__text');
 //category filter
 const typeField = document.querySelector('.filter')
 
-
-
-
-
 let selectedOption = '';
 let transactionType = '';
 let alertTimeout = null;
@@ -37,15 +36,26 @@ let currentEdit = null;
 const incomeOptions = ['Salary', 'Sale', 'Commissions'];
 const expensesOptions = ['Food', 'Medecine', 'Supplies', 'Plants'];
 
+
+
+
 // Edit modal
 ul.addEventListener('click', (e) => {
 
-  const editButton = e.target.closest('.transaction__edit')
+  const targetButton = e.target.closest('.transaction__edit');
 
-  if (!editButton) return;
-  currentEdit = editButton.closest('.transaction__item')
+  // if (targetButton.classList.value !== 'transaction__edit' || targetButton.classList.value !== 'transaction__delete'){
+  //   return
+  // }
 
-  openModal()
+  if(targetButton.classList.value === 'transaction__edit'){
+    currentEdit = targetButton.dataset.id;
+    const itemGet = JSON.parse(localStorage.getItem('transactions', currentEdit))
+
+    editModal(itemGet[0])
+  }
+
+    // openModal()
 
 })
 
@@ -160,7 +170,7 @@ const openModal = () => {
 
 //close the modal
 const closeModal = () => {
-  transactionType = 'expense';
+  transactionType = '';
   transactionName.value = '';
   selectedOption = '';
   amount.value = '';
@@ -309,3 +319,25 @@ const transactionTypeFilter = (transTypeValue) => {
   })
 }
 
+const editModal = (data) => {
+  // modalExpensesInput
+  // modalIncomeInput
+
+  if(!data){
+    return
+  }
+
+  openModal()
+
+  if(data.type === 'expense'){
+    modalExpensesInput.checked = true;
+    dynamicDropdown(expensesOptions)
+  } else if (data.type === 'income'){
+    modalIncomeInput.checked = true;
+    dynamicDropdown(incomeOptions)
+  }
+
+  transactionName.value = data.name
+  amount.value = data.amount
+  modalDropdown.firstElementChild.textContent = data.category
+}
