@@ -36,26 +36,31 @@ let currentEdit = null;
 const incomeOptions = ['Salary', 'Sale', 'Commissions'];
 const expensesOptions = ['Food', 'Medecine', 'Supplies', 'Plants'];
 
-
-
+//Edit Modal Variables
+const editModal = document.querySelector('.edit-modal')
+const eModalExpensesInput = document.querySelector('#edit-modal-expenses')
+const eModalIncomeInput = document.querySelector('#edit-modal-income')
 
 // Edit modal
 ul.addEventListener('click', (e) => {
 
   const targetButton = e.target.closest('.transaction__edit');
 
-  // if (targetButton.classList.value !== 'transaction__edit' || targetButton.classList.value !== 'transaction__delete'){
-  //   return
-  // }
-
-  if(targetButton.classList.value === 'transaction__edit'){
-    currentEdit = targetButton.dataset.id;
-    const itemGet = JSON.parse(localStorage.getItem('transactions', currentEdit))
-
-    editModal(itemGet[0])
+  if (targetButton.classList.value !== 'transaction__edit'){
+    return
   }
 
-    // openModal()
+  console.log('button clicked')
+  openEditModal()
+
+  // if(targetButton.classList.value === 'transaction__edit'){
+  //   currentEdit = targetButton.dataset.id;
+  //   const transactions = JSON.parse(localStorage.getItem('transactions', currentEdit) || [])
+
+  //   const transaction = transactions.find(item => currentEdit === item.id)
+
+  //   editModal(transaction)
+  // }
 
 })
 
@@ -290,6 +295,9 @@ const searchItems = (searchValue) => {
   })
 }
 
+const openEditModal = () => {
+  editModal.style.display = 'flex';
+}
 
 typeField.addEventListener('change', (e) => {
   console.log("type field changed")
@@ -319,25 +327,25 @@ const transactionTypeFilter = (transTypeValue) => {
   })
 }
 
-const editModal = (data) => {
-  // modalExpensesInput
-  // modalIncomeInput
+  // const editModal = (data) => {
+  //   // modalExpensesInput
+  //   // modalIncomeInput
 
-  if(!data){
-    return
-  }
+  //   if(!data){
+  //     return
+  //   }
 
-  openModal()
+  //   openModal()
 
-  if(data.type === 'expense'){
-    modalExpensesInput.checked = true;
-    dynamicDropdown(expensesOptions)
-  } else if (data.type === 'income'){
-    modalIncomeInput.checked = true;
-    dynamicDropdown(incomeOptions)
-  }
+  //   if(data.type === 'expense'){
+  //     modalExpensesInput.checked = true;
+  //     dynamicDropdown(expensesOptions)
+  //   } else if (data.type === 'income'){
+  //     modalIncomeInput.checked = true;
+  //     dynamicDropdown(incomeOptions)
+  //   }
 
-  transactionName.value = data.name
-  amount.value = data.amount
-  modalDropdown.firstElementChild.textContent = data.category
-}
+  //   transactionName.value = data.name
+  //   amount.value = data.amount
+  //   modalDropdown.firstElementChild.textContent = data.category
+  // }
