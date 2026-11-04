@@ -235,53 +235,56 @@
 
           <div class="edit-modal__title">
             <h5 id="edit-modal-title">Edit transaction</h5>
-            <div class="modal-close__icon">
+            <div class="edit-modal__close-icon">
                 <img src="./assets/icons/close-icon.svg" alt="close modal">
             </div>
           </div>
 
-          <div class="modal__filter">
-            <fieldset class="modal__fieldset">
-              <legend class="filter__label">Transaction type</legend>
+          <div class="edit-modal__filter">
+            <fieldset class="edit-modal__fieldset">
+              <legend class="edit-modal__filter-label">Transaction type</legend>
 
-              <div class="modal__filterbody">
-                <div class="expenses__option">
+              <div class="edit-modal__filterbody">
+                <div class="edit-modal__expenses-option">
                   <input type="radio" name="editModalTransaction" value="expense" id="edit-modal-expenses">
-                  <label class="expenses__label" for="edit-modal-expenses">Expenses</label>
+                  <label class="edit-modal__expenses-label" for="edit-modal-expenses">Expenses</label>
                 </div>
 
-                <div class="income__option">
+                <div class="edit-modal__income-option">
                   <input type="radio" name="editModalTransaction" value="income" id="edit-modal-income">
-                  <label class="income__label" for="edit-modal-income">Income</label>
+                  <label class="edit-modal__income-label" for="edit-modal-income">Income</label>
                 </div>
               </div>
             </fieldset>
           </div>
 
-          <div class="modal__fields">
-            <div class="name__field">
+          <div class="edit-modal__fields">
+            <div class="edit-modal__name-field">
               <label for="edit-transaction-name">Title</label>
-              <input id="edit-transaction-name" class="name__input" type="text" placeholder="Popcorn">
+              <input id="edit-transaction-name" class="edit-modal__name-input" type="text" placeholder="Popcorn">
             </div>
 
-            <div class="amount__field">
+            <div class="edit-modal__amount-field">
               <label for="edit-transaction-amount">Amount</label>
-              <input id="edit-transaction-amount" class="amount__input" type="number" placeholder="&#8369; 0.00">
+              <input id="edit-transaction-amount" class="edit-modal__amount-input" type="number" placeholder="&#8369; 0.00">
             </div>
 
-            <div class="category__field">
+            <div class="edit-modal__category-field">
               <label>Category</label>
-              <button type="button" class="dropdown__button">
+              <button type="button" class="edit-modal__dropdown-button">
                 <p>Select Category</p>
                 <img src="./assets/icons/dropdown-icon.svg" alt="">
               </button>
-              <ul class="dropdown__options"></ul>
+              <ul id="edit" class="edit-modal__dropdown-options">
+
+                
+              </ul>
             </div>
           </div>
 
           <div class="edit-modal__buttons">
-            <button class="cancel__button">Cancel</button>
-            <button class="submit__button">Save Changes</button>
+            <button class="edit-modal__cancel-button">Cancel</button>
+            <button class="edit-modal__submit-button">Save Changes</button>
           </div>
         </div>
       </div>

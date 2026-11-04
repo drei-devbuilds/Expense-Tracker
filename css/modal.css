@@ -37,7 +37,7 @@
 }
 
 .modal__title .modal-close__icon,
-.edit-modal__title .modal-close__icon{
+.edit-modal__title .edit-modal__close-icon{
   width: 44px;
   height: 43px;
 }
@@ -49,6 +49,19 @@
   margin: 0;
 }
 
+.edit-modal__filter fieldset{
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.edit-modal__filter-label{
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
 .modal__filterbody{
   display: grid;
   grid-template-columns: repeat(2, minmax(50px, 1fr));
@@ -58,7 +71,26 @@
     font-size: var(--extra-small);
 }
 
+.edit-modal__filterbody{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(50px, 1fr));
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: var(--extra-small);
+}
+
 .modal__filterbody div{
+  display: flex;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.edit-modal__filterbody div{
   display: flex;
   height: 44px;
   align-items: center;
@@ -78,6 +110,11 @@ position: absolute;
     clip: rect(0 0 0 0);
 }
 
+.edit-modal__filter input{
+  position: absolute;
+  clip: rect(0 0 0 0);
+}
+
 .modal__filterbody div label{
     flex: 1;
     text-align: center;
@@ -88,7 +125,21 @@ position: absolute;
     align-items: center;
 }
 
+.edit-modal__filterbody div label{
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .modal__filterbody .expenses__option{
+  border-right: 2px solid var(--border);
+}
+
+.edit-modal__filterbody .edit-modal__expenses-option{
   border-right: 2px solid var(--border);
 }
 
@@ -98,6 +149,12 @@ position: absolute;
       font-weight: 700;
 }
 
+.edit-modal__filterbody div:has(input:checked){
+  background: var(--tint);
+  color: var(--primary);
+  font-weight: 700;
+}
+
 .amount__field{
   display: flex;
   flex-direction: column;
@@ -105,6 +162,20 @@ position: absolute;
 }
 
 .amount__field input{
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 15px;
+  margin: 10px 0 0 0;
+}
+
+.edit-modal__amount-field{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.edit-modal__amount-field input{
   height: 44px;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -126,7 +197,25 @@ position: absolute;
   margin: 10px 0 0 0;
 }
 
+.edit-modal__name-field{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.edit-modal__name-field input{
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 15px;
+  margin: 10px 0 0 0;
+}
+
 .category__field{
+  position: relative;
+}
+
+.edit-modal__category-field{
   position: relative;
 }
 
@@ -146,10 +235,31 @@ position: absolute;
   margin: 10px 0px;
   }
 
+.edit-modal__dropdown-button{
+  width: 100%;
+  border-radius: 0;
+  border-start-end-radius: 8px;
+  border-start-start-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-weight: 400;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  margin: 10px 0;
+}
+
   .dropdown__button img{
     width: 25px;
     height: 25px;
   }
+
+.edit-modal__dropdown-button img{
+  width: 25px;
+  height: 25px;
+}
 
 .dropdown__options{
   border-end-end-radius: 8px;
@@ -169,6 +279,23 @@ position: absolute;
         visibility 200ms ease;
 }
 
+.edit-modal__dropdown-options{
+  border-end-end-radius: 8px;
+  border-end-start-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  top: calc(100%);
+  left: 0;
+  width: 100%;
+  transform: translateY(-8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease,
+    visibility 200ms ease;
+}
+
 
 .dropdown__options.active {
   opacity: 1;
@@ -176,7 +303,25 @@ position: absolute;
   transform: translateY(0);
 }
 
+.edit-modal__dropdown-options.active{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .dropdown__options li button{
+  width: 100%;
+  border-radius: 0;
+  font-weight: 400;
+  color: var(--muted);
+  display: flex;
+  padding: 0 15px;
+  justify-content: start;
+  align-items: center;
+  background-color: var(--surface);
+}
+
+.edit-modal__dropdown-options li button{
   width: 100%;
   border-radius: 0;
   font-weight: 400;
@@ -202,14 +347,22 @@ position: absolute;
   width: 50%;
 }
 
-.modal__buttons .submit__button,
-.edit-modal__buttons .submit__button{
+.modal__buttons .submit__button{
   color: var(--surface);
   background: var(--primary);
 }
 
-.modal__buttons .cancel__button,
-.edit-modal__buttons .cancel__button{
+.modal__buttons .cancel__button{
+  background: none;
+  border: 2px solid var(--border);
+}
+
+.edit-modal__buttons .edit-modal__submit-button{
+  color: var(--surface);
+  background: var(--primary);
+}
+
+.edit-modal__buttons .edit-modal__cancel-button{
   background: none;
   border: 2px solid var(--border);
 }

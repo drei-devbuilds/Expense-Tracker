@@ -40,6 +40,12 @@ const expensesOptions = ['Food', 'Medecine', 'Supplies', 'Plants'];
 const editModal = document.querySelector('.edit-modal')
 const eModalExpensesInput = document.querySelector('#edit-modal-expenses')
 const eModalIncomeInput = document.querySelector('#edit-modal-income')
+const eModalName = document.querySelector('#edit-transaction-name')
+const eModalAmount = document.querySelector('#edit-transaction-amount')
+const eModalDropdownOptions = document.querySelector('.edit-modal__dropdown-options')
+const eModalFieldset = document.querySelector('.edit-modal__fieldset')
+const eModalCategoryField = document.querySelector('.edit-modal__category-field')
+const eModalDropdownButton = document.querySelector('.edit-modal__dropdown-button')
 
 // Edit modal
 ul.addEventListener('click', (e) => {
@@ -50,19 +56,58 @@ ul.addEventListener('click', (e) => {
     return
   }
 
-  console.log('button clicked')
   openEditModal()
 
   // if(targetButton.classList.value === 'transaction__edit'){
-  //   currentEdit = targetButton.dataset.id;
-  //   const transactions = JSON.parse(localStorage.getItem('transactions', currentEdit) || [])
+    currentEdit = targetButton.dataset.id;
+    const transactions = JSON.parse(localStorage.getItem('transactions', currentEdit) || [])
 
-  //   const transaction = transactions.find(item => currentEdit === item.id)
+    const transaction = transactions.find(item => currentEdit === item.id)
+
+    preFilledEditModal(transaction)
+
 
   //   editModal(transaction)
   // }
 
 })
+
+const preFilledEditModal = (data) => {
+
+  if(!data){
+    return
+  }
+
+  if(data.type === 'expense'){
+    eModalExpensesInput.checked = true;
+    dynamicDropdown(expensesOptions)
+  } else if (data.type === 'income') {
+    eModalIncomeInput.checked = true;
+    dynamicDropdown(incomeOptions)
+  }
+
+  eModalName.value = data.name
+  eModalAmount.value = data.amount
+
+  eModalDropdownButton.firstElementChild.textContent = data.category;
+  if (data.type.trim().toLowerCase() === 'expense') {
+    editModaldynamicDropdown(expensesOptions)
+  } else if (data.type.trim().toLocaleLowerCase() === 'income') {
+    editModaldynamicDropdown(incomeOptions)
+  }
+
+  eModalFieldset.addEventListener('change', (e) => {
+    eModalDropdownOptions.innerHTML = ''
+    if (e.target.matches('input[type="radio"]')) {
+      transactionType = e.target.value;
+      if (transactionType.trim().toLocaleLowerCase() === 'expense') {
+        editModaldynamicDropdown(expensesOptions)
+      } else if (transactionType === 'income') {
+        editModaldynamicDropdown(incomeOptions)
+      }
+    }
+  })
+}
 
 //Opens modal for adding transactions
 addButton.addEventListener('click', (e) => {
@@ -70,8 +115,23 @@ addButton.addEventListener('click', (e) => {
 })
 
 //Choose between expenses and income on transactions
-//default is expenses
 //after choosing the category options would also change
+
+const editModaldynamicDropdown = (options) => {
+  options.forEach(item => {
+    const li = document.createElement('li')
+    li.innerHTML = `<button type="button" class="option__button" data-category="${item}">${item}</button>`
+    eModalDropdownOptions.prepend(li)
+  })
+}
+
+eModalCategoryField.addEventListener('click', (e) => {
+  eModalDropdownOptions.classList.toggle('active')
+  if (e.target.classList.value == 'option__button') {
+    selectedOption = e.target.textContent;
+    eModalDropdownButton.firstElementChild.textContent = selectedOption;
+  }
+})
 
 modalFieldset.addEventListener('change', (e) => {
   modalDropdownOptions.innerHTML = '';
@@ -156,7 +216,6 @@ const createListItem = () => {
 } 
 
 submitButton.addEventListener('click', (e) => {
-  console.log('submit clicked')
   getData()
   createListItem()
 })
@@ -300,7 +359,6 @@ const openEditModal = () => {
 }
 
 typeField.addEventListener('change', (e) => {
-  console.log("type field changed")
 
   if (e.target.matches('input[type="radio"]')){
       transactionTypeFilter(e.target.value)
