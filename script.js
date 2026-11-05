@@ -38,8 +38,8 @@ const expensesOptions = ['Food', 'Medecine', 'Supplies', 'Plants'];
 
 //Edit Modal Variables
 const editModal = document.querySelector('.edit-modal')
-const eModalExpensesInput = document.querySelector('#edit-modal-expenses')
-const eModalIncomeInput = document.querySelector('#edit-modal-income')
+const eModalExpensesInput = document.querySelector('#edit-modal-expenses')//expenses type
+const eModalIncomeInput = document.querySelector('#edit-modal-income')// income Type
 const eModalName = document.querySelector('#edit-transaction-name')
 const eModalAmount = document.querySelector('#edit-transaction-amount')
 const eModalDropdownOptions = document.querySelector('.edit-modal__dropdown-options')
@@ -89,12 +89,16 @@ const preFilledEditModal = (data) => {
   eModalName.value = data.name
   eModalAmount.value = data.amount
 
+
+  //here check what kind of transaction type the existing data is 
+  //and by that choose the dropdown option
   eModalDropdownButton.firstElementChild.textContent = data.category;
   if (data.type.trim().toLowerCase() === 'expense') {
     editModaldynamicDropdown(expensesOptions)
   } else if (data.type.trim().toLocaleLowerCase() === 'income') {
     editModaldynamicDropdown(incomeOptions)
   }
+
 
   eModalFieldset.addEventListener('change', (e) => {
     eModalDropdownOptions.innerHTML = ''
@@ -107,6 +111,16 @@ const preFilledEditModal = (data) => {
       }
     }
   })
+
+  editChangeChecker(data)
+}
+
+
+const editChangeChecker = (data) => {
+  console.log(data)
+
+  if(eModalExpensesInput === data.type)
+  let
 }
 
 //Opens modal for adding transactions
