@@ -46,6 +46,7 @@ const eModalDropdownOptions = document.querySelector('.edit-modal__dropdown-opti
 const eModalFieldset = document.querySelector('.edit-modal__fieldset')
 const eModalCategoryField = document.querySelector('.edit-modal__category-field')
 const eModalDropdownButton = document.querySelector('.edit-modal__dropdown-button')
+const eModalSubmitButton = document.querySelector('.edit-modal__submit-button');
 
 // Edit modal
 ul.addEventListener('click', (e) => {
@@ -64,7 +65,7 @@ ul.addEventListener('click', (e) => {
 
     const transaction = transactions.find(item => currentEdit === item.id)
 
-    preFilledEditModal(transaction)
+  preFilledEditModal(transaction)
 
 
   //   editModal(transaction)
@@ -112,15 +113,59 @@ const preFilledEditModal = (data) => {
     }
   })
 
-  editChangeChecker(data)
+
+eModalSubmitButton.addEventListener('click', () => {
+    const editedTransaction = editChangeChecker(data)
+    
+    if(!editedTransaction){
+      return
+    }
+
+    const transactions = JSON.parse(localStorage.getItem('transactions', currentEdit) || [])
+
+    let transaction = transactions.find(item => currentEdit === item.id)
+
+    if(transaction){
+      transaction.type = editedTransaction.type;
+      transaction.name = editedTransaction.name;
+      transaction.amount = editedTransaction.amount;
+      transaction.category = editedTransaction.category;
+    }
+
+  localStorage.setItem('transactions', JSON.stringify(transactions));
+  })
+  
 }
 
 
 const editChangeChecker = (data) => {
-  console.log(data)
 
-  if(eModalExpensesInput === data.type)
-  let
+  let transType;
+  if(eModalExpensesInput.checked){
+    transType = 'expense'
+  }else if(eModalIncomeInput.checked){
+    transType = 'income'
+  }
+
+  let editSelected = eModalDropdownButton.firstElementChild.textContent;
+
+  if (transType === data.type && eModalAmount.value === data.amount && eModalName.value === data.name && editSelected === data.category){ 
+    openAlert('error', 'No changes Detected')
+    alertTimeout = setTimeout(() => closeAlert(), 1000)
+    return
+  }
+
+  const transaction = {
+    id: data.id,
+    date: data.date,
+    type: transType,
+    name: eModalName.value,
+    amount: eModalAmount.value,
+    category: editSelected
+  } 
+
+  return transaction
+
 }
 
 //Opens modal for adding transactions
@@ -370,6 +415,9 @@ const searchItems = (searchValue) => {
 
 const openEditModal = () => {
   editModal.style.display = 'flex';
+}
+const closeEditModal = () => {
+  editModal.style.display = 'none';
 }
 
 typeField.addEventListener('change', (e) => {
